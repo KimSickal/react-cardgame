@@ -1,7 +1,29 @@
 import * as React from 'react';
 
-export class KeyboardHandlerContainer extends React.Component {
-	constructor(props: {}) {
+import {
+	AnyAction,
+	Dispatch,
+	bindActionCreators,
+} from 'redux';
+
+import {
+	connect,
+} from 'react-redux';
+
+import {
+	keydownMoveCharacter,
+} from '../actions';
+
+import {
+	State,
+} from '../reducers';
+
+interface ComponentProps {
+	keydownMoveCharacter: typeof keydownMoveCharacter;
+}
+
+class KeyboardHandlerComponent extends React.Component<ComponentProps> {
+	constructor(props: ComponentProps) {
 		super(props);
 		this.onKeyDown = this.onKeyDown.bind(this);
 	}
@@ -24,3 +46,15 @@ export class KeyboardHandlerContainer extends React.Component {
 		);
 	}
 }
+
+function mapStateToProps(state: State) {
+	return {};
+}
+
+function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
+	return bindActionCreators({
+		keydownMoveCharacter,
+	}, dispatch);
+}
+
+export const KeyboardHandlerContainer = connect(mapStateToProps, mapDispatchToProps)(KeyboardHandlerComponent);
