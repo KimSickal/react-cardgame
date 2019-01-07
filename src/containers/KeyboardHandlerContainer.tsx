@@ -11,7 +11,7 @@ export class KeyboardHandlerContainer extends React.Component {
 	}
 
 	public componentDidMount() {
-		window.addEventListener('keydown', this.onKeyDown)
+		window.addEventListener('keydown', this.onKeyDown);
 	}
 
 	public componentWillUnmount() {
