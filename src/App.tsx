@@ -4,7 +4,7 @@ import './App.css';
 import { KeyboardHandlerContainer } from './containers/KeyboardHandlerContainer';
 
 export class App extends React.Component {
-	render() {
+	public render() {
 		return (
 			<div className="App">
 				<KeyboardHandlerContainer/>
