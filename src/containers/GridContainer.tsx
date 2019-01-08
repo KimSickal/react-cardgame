@@ -28,11 +28,20 @@ class GridComponent extends React.Component<ComponentProps> {
 		return (
 			<div
 				style={{
-					top: posY * 10,
-					left: posX * 10,
+					width: '500px',
+					height: '500px',
 				}}
 			>
-				{'asdf'}
+				<div
+					style={{
+						position: 'absolute',
+						width: '10px',
+						height: '10px',
+						background: 'grey',
+						top: posY * 10,
+						left: posX * 10,
+					}}
+				/>
 			</div>
 		);
 	}
