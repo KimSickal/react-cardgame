@@ -1,16 +1,45 @@
-import { KeyboardHanlderAction, KeyboardHandlerKeys } from '../actions/types';
+import {
+	KeyboardHanlderAction,
+	KeyboardHandlerKeys,
+} from '../actions/types';
+
+import {
+	CellType,
+	gridSize,
+} from '../constants';
+
+import {
+	position,
+} from '../models';
+
+export interface GridState {
+	grid: CellType[][];
+}
+
+const initialGridState: GridState = {
+	grid: Array.from(Array(gridSize[0])).map(() => {
+		return Array.from(Array(gridSize[1])).map(() => {
+			return CellType.CELL_BLANK;
+		});
+	}),
+};
 
 export interface KeyboardHandlerState {
 	posX: number;
 	posY: number;
 }
 
-const initialState: KeyboardHandlerState = {
+const initialKeyboardHandlerState: KeyboardHandlerState = {
 	posX: 0,
 	posY: 0,
 };
 
-export function KeyboardHandler(state = initialState, action: KeyboardHanlderAction) {
+export interface SnakeState {
+	head: position;
+	tails: position[];
+}
+
+export function KeyboardHandler(state = initialKeyboardHandlerState, action: KeyboardHanlderAction) {
 	const {
 		posX,
 		posY,
