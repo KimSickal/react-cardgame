@@ -1,1 +1,1 @@
-export * from './KeyboardHandlerSelector';
+export * from './SnakeSelector';

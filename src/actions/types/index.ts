@@ -1,1 +1,2 @@
-export * from './KeyboardHandlerActionTypes';
+export * from './SnakeActionTypes';
+export * from './GridActionTypes';

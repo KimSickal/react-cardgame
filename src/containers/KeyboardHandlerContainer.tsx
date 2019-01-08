@@ -11,7 +11,7 @@ import {
 } from 'react-redux';
 
 import {
-	keydownMoveCharacter,
+	keydownMoveHead,
 } from '../actions';
 
 import {
@@ -19,7 +19,7 @@ import {
 } from '../reducers';
 
 interface ComponentProps {
-	keydownMoveCharacter: typeof keydownMoveCharacter;
+	keydownMoveCharacter: typeof keydownMoveHead;
 }
 
 class KeyboardHandlerComponent extends React.Component<ComponentProps> {
@@ -53,7 +53,7 @@ function mapStateToProps(state: State) {
 
 function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
 	return bindActionCreators({
-		keydownMoveCharacter,
+		keydownMoveCharacter: keydownMoveHead,
 	}, dispatch);
 }
 

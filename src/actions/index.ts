@@ -1,1 +1,1 @@
-export * from './KeyboardHandlerActions';
+export * from './SnakeActions';

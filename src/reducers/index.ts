@@ -3,14 +3,13 @@ import {
 } from 'redux';
 
 import {
-	KeyboardHandler,
-	KeyboardHandlerState,
-} from './KeyboardHandlerReducer';
+	snake, SnakeState,
+} from './SnakeReducer';
 
 export interface State {
-	KeyboardHandler: KeyboardHandlerState;
+	snake: SnakeState;
 }
 
 export const reducers = combineReducers<State>({
-	KeyboardHandler:KeyboardHandler,
+	snake,
 });
