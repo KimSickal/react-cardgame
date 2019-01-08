@@ -2,8 +2,6 @@ import {
 	Action,
 } from 'redux';
 
-export const moveEventPrefix = 'KEYDOWN';
-
 export enum KeyboardHandlerKeys {
 	MOVE_UP = 'MOVE_UP',
 	MOVE_RIGHT = 'MOVE_RIGHT',

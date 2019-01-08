@@ -11,26 +11,31 @@ const initialState: KeyboardHandlerState = {
 };
 
 export function KeyboardHandler(state = initialState, action: KeyboardHanlderAction) {
+	const {
+		posX,
+		posY,
+	} = state;
+
 	switch(action.type) {
 		case KeyboardHandlerKeys.MOVE_RIGHT:
 			return {
 				...state,
-				posX: state.posX + 1,
+				posX: posX + 1,
 			};
-		case KeyboardHandlerKeys.MOVE_RIGHT:
+		case KeyboardHandlerKeys.MOVE_LEFT:
 			return {
 				...state,
-				posX: state.posX - 1,
+				posX: posX - 1,
 			};
-		case KeyboardHandlerKeys.MOVE_RIGHT:
+		case KeyboardHandlerKeys.MOVE_DOWN:
 			return {
 				...state,
-				posX: state.posY + 1,
+				posY: posY + 1,
 			};
-		case KeyboardHandlerKeys.MOVE_RIGHT:
+		case KeyboardHandlerKeys.MOVE_UP:
 			return {
 				...state,
-				posX: state.posY - 1,
+				posY: posY - 1,
 			};
 		default:
 			return state;

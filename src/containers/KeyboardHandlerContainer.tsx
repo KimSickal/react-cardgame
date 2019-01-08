@@ -29,7 +29,7 @@ class KeyboardHandlerComponent extends React.Component<ComponentProps> {
 	}
 
 	private onKeyDown(ev: KeyboardEvent) {
-		console.log(ev.keyCode);
+		this.props.keydownMoveCharacter(ev.keyCode);
 	}
 
 	public componentDidMount() {

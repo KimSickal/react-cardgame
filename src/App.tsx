@@ -1,13 +1,18 @@
 import * as React from 'react';
 
+import {
+	KeyboardHandlerContainer,
+	GridContainer,
+} from './containers';
+
 import './App.css';
-import { KeyboardHandlerContainer } from './containers/KeyboardHandlerContainer';
 
 export class App extends React.Component {
 	public render() {
 		return (
 			<div className="App">
 				<KeyboardHandlerContainer/>
+				<GridContainer/>
 			</div>
 		);
 	}
