@@ -9,20 +9,24 @@ import {
 } from '../reducers';
 
 import {
-	getPosX,
-	getPosY,
+	getPos,
+	getTails,
 } from '../selectors';
 
+import {
+	position,
+} from '../models';
+
 interface ComponentProps {
-	posX: number;
-	posY: number;
+	head: position;
+	tails: position[];
 }
 
 class GridComponent extends React.Component<ComponentProps> {
 	public render() {
 		const {
-			posX,
-			posY,
+			head,
+			tails,
 		} = this.props;
 
 		return (
@@ -38,10 +42,25 @@ class GridComponent extends React.Component<ComponentProps> {
 						width: '10px',
 						height: '10px',
 						background: 'grey',
-						top: posY * 10,
-						left: posX * 10,
+						top: head.posY * 10,
+						left: head.posX * 10,
 					}}
 				/>
+				{tails.map((e, i) => {
+					return (
+						<div
+							style={{
+								position: 'absolute',
+								width: '10px',
+								height: '10px',
+								background: 'black',
+								top: e.posY * 10,
+								left: e.posX * 10,
+							}}
+							key={i}
+						/>
+					);
+				})}
 			</div>
 		);
 	}
@@ -49,8 +68,8 @@ class GridComponent extends React.Component<ComponentProps> {
 
 function mapStateToProps(state: State) {
 	return {
-		posX: getPosX(state),
-		posY: getPosY(state),
+		head: getPos(state),
+		tails: getTails(state),
 	};
 }
 

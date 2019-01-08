@@ -27,3 +27,9 @@ export const getPosY = createSelector([
 ], (state) => {
 	return state.head.posY;
 });
+
+export const getTails = createSelector([
+	getState,
+], (state) => {
+	return state.tails;
+});

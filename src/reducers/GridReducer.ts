@@ -4,7 +4,7 @@ import {
 } from '../constants';
 
 import {
-	GridAction,
+	GridAction, GridKeys,
 } from '../actions/types';
 
 export interface GridState {
@@ -12,8 +12,11 @@ export interface GridState {
 }
 
 const initialGridState: GridState = {
-	grid: Array.from(Array(gridSize[0])).map(() => {
-		return Array.from(Array(gridSize[1])).map(() => {
+	grid: Array.from(Array(gridSize[0])).map((_1, i) => {
+		return Array.from(Array(gridSize[1])).map((_2, j) => {
+			if(i === 0 && j === 0) {
+				return CellType.CELL_SNAKE_HEADER;
+			}
 			return CellType.CELL_BLANK;
 		});
 	}),
@@ -21,6 +24,13 @@ const initialGridState: GridState = {
 
 export function grid(state = initialGridState, action: GridAction) {
 	switch(action.type) {
+		case GridKeys.SET_CELL:
+			const grid = state.grid;
+			grid[action.position.posX][action.position.posY] = action.cellType;
+			console.log(grid);
+			return {
+				grid: grid,
+			};
 		default:
 			return state;
 	}

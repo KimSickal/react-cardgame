@@ -20,7 +20,19 @@ import {
 import {
 	position,
 } from '../models';
-import { getPos } from '../selectors';
+
+import {
+	getPos,
+	getTails,
+} from '../selectors';
+
+import {
+	setCell,
+} from '../actions';
+
+import {
+	CellType,
+} from '../constants';
 
 function moveUp(): MoveUpAction {
 	return {
@@ -82,9 +94,14 @@ function moveHead(keyCode: number, state: State) {
 		if(moveAction === undefined) {
 			return;
 		}
-		dispatch(pushTails(getPos(state)));
+		const head = getPos(state);
+		const firstChild = getTails(state)[0];
+		dispatch(setCell(head, CellType.CELL_SNAKE_BODY));
+		dispatch(pushTails(head));
+		dispatch(setCell(firstChild, CellType.CELL_BLANK));
 		dispatch(popTails());
 		dispatch(moveAction());
+		dispatch(setCell(getPos(state), CellType.CELL_SNAKE_HEADER));
 	};
 }
 
