@@ -149,10 +149,12 @@ export function keydownMoveHeadIfNeeded(keyCode: number) {
 					dispatch(keydownMoveAndStretch(prevPos, targetPos));
 				}
 				else {
+					console.log(getGrid(state));
 					dispatch(toggleGameOver());
 				}
 			}
 			else {
+				console.log(getGrid(state));
 				dispatch(toggleGameOver());
 			}
 		}
