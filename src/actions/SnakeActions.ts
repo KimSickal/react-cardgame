@@ -83,7 +83,6 @@ function keydownMoveHead(prevPos: position, targetPos: position, endOfTail: posi
 
 function keydownMoveAndStretch(prevPos: position, targetPos: position) {
 	return (dispatch: Dispatch<AnyAction>) => {
-		console.log('asdf');
 		dispatch(setCell(prevPos, CellType.CELL_SNAKE_BODY));
 		dispatch(setCell(targetPos, CellType.CELL_SNAKE_HEAD));
 

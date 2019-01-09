@@ -58,7 +58,6 @@ export function grid(state = initialGridState, action: GridAction) {
 					break;
 				}
 			}
-			console.log(newGrid);
 			return {
 				grid: newGrid,
 				item: {
