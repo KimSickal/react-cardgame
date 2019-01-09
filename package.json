@@ -2,7 +2,7 @@
   "name": "react-cardgame",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kimsickal.github.io/react-cardgame",
+  "homepage": "https://kimsickal.github.io/react-snake-game",
   "dependencies": {
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
