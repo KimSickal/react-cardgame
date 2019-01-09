@@ -1,13 +1,13 @@
 {
-  "main.css": "/react-snake-game/static/css/main.1834f15c.chunk.css",
-  "main.js": "/react-snake-game/static/js/main.8ed59d94.chunk.js",
-  "main.js.map": "/react-snake-game/static/js/main.8ed59d94.chunk.js.map",
-  "static/js/1.54c6bda4.chunk.js": "/react-snake-game/static/js/1.54c6bda4.chunk.js",
-  "static/js/1.54c6bda4.chunk.js.map": "/react-snake-game/static/js/1.54c6bda4.chunk.js.map",
+  "main.css": "/react-snake-game/static/css/main.a09e1c79.chunk.css",
+  "main.js": "/react-snake-game/static/js/main.60ad46f0.chunk.js",
+  "main.js.map": "/react-snake-game/static/js/main.60ad46f0.chunk.js.map",
+  "static/js/1.abbe8ae8.chunk.js": "/react-snake-game/static/js/1.abbe8ae8.chunk.js",
+  "static/js/1.abbe8ae8.chunk.js.map": "/react-snake-game/static/js/1.abbe8ae8.chunk.js.map",
   "runtime~main.js": "/react-snake-game/static/js/runtime~main.436856fc.js",
   "runtime~main.js.map": "/react-snake-game/static/js/runtime~main.436856fc.js.map",
-  "static/css/main.1834f15c.chunk.css.map": "/react-snake-game/static/css/main.1834f15c.chunk.css.map",
+  "static/css/main.a09e1c79.chunk.css.map": "/react-snake-game/static/css/main.a09e1c79.chunk.css.map",
   "index.html": "/react-snake-game/index.html",
-  "precache-manifest.3c19380d8b5253afcccf8f3942f398af.js": "/react-snake-game/precache-manifest.3c19380d8b5253afcccf8f3942f398af.js",
+  "precache-manifest.770a054a77cdd07d26405b5a30b7876c.js": "/react-snake-game/precache-manifest.770a054a77cdd07d26405b5a30b7876c.js",
   "service-worker.js": "/react-snake-game/service-worker.js"
 }
