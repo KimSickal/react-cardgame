@@ -53,6 +53,7 @@ export function grid(state = initialGridState, action: GridAction) {
 			};
 		case GridKeys.RANDOM_PUT_ITEM:
 			const newGrid = state.grid;
+			const prevBlock = state.block;
 			let randomItemPosX = 0;
 			let randomItemPosY = 0;
 			let randomBlockPosX = 0;
@@ -70,6 +71,7 @@ export function grid(state = initialGridState, action: GridAction) {
 				randomBlockPosX = Math.floor(Math.random() * gridSize[1]);
 				if(newGrid[randomBlockPosY][randomBlockPosX] === CellType.CELL_BLANK){
 					newGrid[randomBlockPosY][randomBlockPosX] = CellType.CELL_SNAKE_BLOCK;
+					newGrid[prevBlock.posY][prevBlock.posX] = CellType.CELL_BLANK;
 					break;
 				}
 			}
