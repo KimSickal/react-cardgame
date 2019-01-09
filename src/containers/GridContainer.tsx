@@ -1,6 +1,12 @@
 import * as React from 'react';
 
 import {
+	Dispatch,
+	AnyAction,
+	bindActionCreators,
+} from 'redux';
+
+import {
 	connect,
 } from 'react-redux';
 
@@ -17,12 +23,25 @@ import {
 	position,
 } from '../models';
 
+import {
+	initializeGrid,
+} from '../actions';
+
 interface ComponentProps {
 	head: position;
 	tails: position[];
+
+	initializeGrid: typeof initializeGrid;
 }
 
 class GridComponent extends React.Component<ComponentProps> {
+	public componentDidMount() {
+		const {
+			head,
+		} = this.props;
+		this.props.initializeGrid(head);
+	}
+
 	public render() {
 		const {
 			head,
@@ -73,4 +92,9 @@ function mapStateToProps(state: State) {
 	};
 }
 
-export const GridContainer = connect(mapStateToProps)(GridComponent);
+function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
+	return bindActionCreators({
+		initializeGrid: initializeGrid,
+	}, dispatch);
+}
+export const GridContainer = connect(mapStateToProps, mapDispatchToProps)(GridComponent);

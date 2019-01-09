@@ -12,6 +12,7 @@ import {
 
 export enum GridKeys {
 	SET_CELL = 'SET_CELL',
+	INIT_GRID = 'INIT_GRID',
 }
 
 export interface setCellAction extends Action {
@@ -20,6 +21,12 @@ export interface setCellAction extends Action {
 	cellType: CellType;
 }
 
+export interface initializeGridAction extends Action {
+	type: GridKeys.INIT_GRID;
+	head: position;
+}
+
 export type GridAction = (
 	| setCellAction
+	| initializeGridAction
 );

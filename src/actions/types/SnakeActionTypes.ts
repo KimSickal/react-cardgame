@@ -7,28 +7,14 @@ import {
 } from '../../models';
 
 export enum SnakeKeys {
-	MOVE_UP = 'MOVE_UP',
-	MOVE_RIGHT = 'MOVE_RIGHT',
-	MOVE_LEFT = 'MOVE_LEFT',
-	MOVE_DOWN = 'MOVE_DOWN',
+	MOVE_HEAD = 'MOVE_HEAD',
 	POP_TAILS = 'POP_TAILS',
 	PUSH_TAILS = 'PUSH_TAILS',
 }
 
-export interface MoveUpAction extends Action {
-	type: SnakeKeys.MOVE_UP;
-}
-
-export interface MoveRightAction extends Action {
-	type: SnakeKeys.MOVE_RIGHT;
-}
-
-export interface MoveLeftAction extends Action {
-	type: SnakeKeys.MOVE_LEFT;
-}
-
-export interface MoveDownAction extends Action {
-	type: SnakeKeys.MOVE_DOWN;
+export interface MoveHeadAction extends Action {
+	type: SnakeKeys.MOVE_HEAD;
+	targetPos: position;
 }
 
 export interface PopTailsAction extends Action {
@@ -41,10 +27,7 @@ export interface PushTailsAction extends Action {
 }
 
 export type SnakeAction = (
-	| MoveUpAction
-	| MoveRightAction
-	| MoveDownAction
-	| MoveLeftAction
+	| MoveHeadAction
 	| PopTailsAction
 	| PushTailsAction
 );

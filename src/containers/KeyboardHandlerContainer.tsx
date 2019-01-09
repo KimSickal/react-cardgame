@@ -11,7 +11,8 @@ import {
 } from 'react-redux';
 
 import {
-	keydownMoveHead,
+	keydownMoveHeadIfNeeded,
+	initializeGrid,
 } from '../actions';
 
 import {
@@ -19,7 +20,8 @@ import {
 } from '../reducers';
 
 interface ComponentProps {
-	keydownMoveCharacter: typeof keydownMoveHead;
+	keydownMoveHeadIfNeeded: typeof keydownMoveHeadIfNeeded;
+	initializeGrid: typeof initializeGrid;
 }
 
 class KeyboardHandlerComponent extends React.Component<ComponentProps> {
@@ -29,7 +31,7 @@ class KeyboardHandlerComponent extends React.Component<ComponentProps> {
 	}
 
 	private onKeyDown(ev: KeyboardEvent) {
-		this.props.keydownMoveCharacter(ev.keyCode);
+		this.props.keydownMoveHeadIfNeeded(ev.keyCode);
 	}
 
 	public componentDidMount() {
@@ -53,7 +55,8 @@ function mapStateToProps(state: State) {
 
 function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
 	return bindActionCreators({
-		keydownMoveCharacter: keydownMoveHead,
+		keydownMoveHeadIfNeeded: keydownMoveHeadIfNeeded,
+		initializeGrid: initializeGrid,
 	}, dispatch);
 }
 

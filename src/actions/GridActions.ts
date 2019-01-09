@@ -1,6 +1,7 @@
 import {
 	setCellAction,
 	GridKeys,
+	initializeGridAction,
 } from './types';
 
 import {
@@ -16,5 +17,12 @@ export function setCell(position: position, cellType: CellType): setCellAction {
 		type: GridKeys.SET_CELL,
 		position: position,
 		cellType: cellType,
+	};
+}
+
+export function initializeGrid(head: position): initializeGridAction {
+	return {
+		type: GridKeys.INIT_GRID,
+		head: head,
 	};
 }

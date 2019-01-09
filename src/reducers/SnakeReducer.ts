@@ -32,46 +32,13 @@ const initialSnakeState: SnakeState = {
 export function snake(state = initialSnakeState, action: SnakeAction) {
 	const {
 		tails,
-		head,
 	} = state;
 
-	const {
-		posX,
-		posY,
-	} = head;
-
 	switch(action.type) {
-		case SnakeKeys.MOVE_RIGHT:
+		case SnakeKeys.MOVE_HEAD:
 			return {
 				...state,
-				head: {
-					posX: posX + 1,
-					posY: posY,
-				},
-			};
-		case SnakeKeys.MOVE_LEFT:
-			return {
-				...state,
-				head: {
-					posX: posX - 1,
-					posY: posY,
-				},
-			};
-		case SnakeKeys.MOVE_DOWN:
-			return {
-				...state,
-				head: {
-					posX: posX,
-					posY: posY + 1,
-				},
-			};
-		case SnakeKeys.MOVE_UP:
-			return {
-				...state,
-				head: {
-					posX: posX,
-					posY: posY - 1,
-				},
+				head: action.targetPos,
 			};
 		case SnakeKeys.POP_TAILS:
 			return {

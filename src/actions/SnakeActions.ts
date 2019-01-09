@@ -5,12 +5,9 @@ import {
 
 import {
 	SnakeKeys,
-	MoveUpAction,
-	MoveRightAction,
-	MoveDownAction,
-	MoveLeftAction,
 	PopTailsAction,
 	PushTailsAction,
+	MoveHeadAction,
 } from './types';
 
 import {
@@ -24,6 +21,7 @@ import {
 import {
 	getPos,
 	getTails,
+	getGrid,
 } from '../selectors';
 
 import {
@@ -32,31 +30,8 @@ import {
 
 import {
 	CellType,
+	gridSize,
 } from '../constants';
-
-function moveUp(): MoveUpAction {
-	return {
-		type: SnakeKeys.MOVE_UP,
-	};
-}
-
-function moveRight(): MoveRightAction {
-	return {
-		type: SnakeKeys.MOVE_RIGHT,
-	};
-}
-
-function moveDown(): MoveDownAction {
-	return {
-		type: SnakeKeys.MOVE_DOWN,
-	};
-}
-
-function moveLeft(): MoveLeftAction {
-	return {
-		type: SnakeKeys.MOVE_LEFT,
-	};
-}
 
 function popTails(): PopTailsAction {
 	return {
@@ -64,53 +39,92 @@ function popTails(): PopTailsAction {
 	};
 }
 
-function pushTails(position: position): PushTailsAction {
+function pushTails(targetPos: position): PushTailsAction {
 	return {
 		type: SnakeKeys.PUSH_TAILS,
-		targetPos: position,
+		targetPos: targetPos,
 	};
 }
 
-function couldMoveHead(state: State) {
-	return true;
+function moveHead(targetPos: position): MoveHeadAction {
+	return {
+		type: SnakeKeys.MOVE_HEAD,
+		targetPos: targetPos,
+	};
 }
 
-function moveHead(keyCode: number, state: State) {
+function couldMoveHead(keyCode: number, targetPos: position, state: State) {
+	if(targetPos.posY < 0 || targetPos.posY >= gridSize[0]) {
+		return false;
+	}
+	if(targetPos.posX < 0 || targetPos.posX >= gridSize[1]) {
+		return false;
+	}
+	return keyCode >= 37 && keyCode <= 40;
+}
+
+function keydownMoveHead(prevPos: position, targetPos: position, endOfTail: position) {
 	return (dispatch: Dispatch<AnyAction>) => {
-		const moveAction = (() => {
-			switch(keyCode) {
-				case 37:
-					return moveLeft;
-				case 38:
-					return moveUp;
-				case 39:
-					return moveRight;
-				case 40:
-					return moveDown;
-				default:
-					return;
-			}
-		})();
-		if(moveAction === undefined) {
-			return;
-		}
-		const head = getPos(state);
-		const firstChild = getTails(state)[0];
-		dispatch(setCell(head, CellType.CELL_SNAKE_BODY));
-		dispatch(pushTails(head));
-		dispatch(setCell(firstChild, CellType.CELL_BLANK));
+		dispatch(setCell(prevPos, CellType.CELL_SNAKE_BODY));
+		dispatch(setCell(endOfTail, CellType.CELL_BLANK));
+		dispatch(setCell(targetPos, CellType.CELL_SNAKE_HEAD));
+
+		dispatch(moveHead(targetPos));
+		dispatch(pushTails(prevPos));
 		dispatch(popTails());
-		dispatch(moveAction());
-		dispatch(setCell(getPos(state), CellType.CELL_SNAKE_HEADER));
 	};
 }
 
-export function keydownMoveHead(keyCode: number) {
+function keydownMoveAndStretch(prevPos: position, targetPos: position) {
+	return (dispatch: Dispatch<AnyAction>) => {
+		dispatch(setCell(prevPos, CellType.CELL_SNAKE_BODY));
+		dispatch(setCell(targetPos, CellType.CELL_SNAKE_HEAD));
+
+		dispatch(moveHead(targetPos));
+		dispatch(pushTails(prevPos));
+	};
+}
+
+export function keydownMoveHeadIfNeeded(keyCode: number) {
 	return (dispatch: Dispatch<any>, getState: () => State) => {
 		const state = getState();
+		const prevPos = getPos(state);
+		const targetPos = (() => {
+			switch(keyCode) {
+				case 37:
+					return {
+						posX: prevPos.posX - 1,
+						posY: prevPos.posY,
+					};
+				case 38:
+					return {
+						posX: prevPos.posX,
+						posY: prevPos.posY - 1,
+					};
+				case 39:
+					return {
+						posX: prevPos.posX + 1,
+						posY: prevPos.posY,
+					};
+				case 40:
+					return {
+						posX: prevPos.posX,
+						posY: prevPos.posY + 1,
+					};
+				default:
+					return prevPos;
+			}
+		})();
 
-		if(couldMoveHead(state)) {
-			dispatch(moveHead(keyCode, state));
+		if(couldMoveHead(keyCode, targetPos, state)) {
+			const targetCellType = getGrid(state)[targetPos.posY][targetPos.posX];
+			if(targetCellType === CellType.CELL_BLANK) {
+				const endOfTail = getTails(state)[0];
+				dispatch(keydownMoveHead(prevPos, targetPos, endOfTail));
+			}
+			else if(targetCellType === CellType.CELL_SNAKE_ITEM) {
+				dispatch(keydownMoveAndStretch(prevPos, targetPos));
+			}
 		}
 	};
 }
