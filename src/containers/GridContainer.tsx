@@ -29,6 +29,10 @@ import {
 	randomPutItem,
 } from '../actions';
 
+import {
+	gridSize, cellSize,
+} from '../constants';
+
 interface ComponentProps {
 	head: position;
 	tails: position[];
@@ -57,18 +61,19 @@ class GridComponent extends React.Component<ComponentProps> {
 		return (
 			<div
 				style={{
-					width: '500px',
-					height: '500px',
+					width: `${gridSize[1] * cellSize}px`,
+					height: `${gridSize[0] * cellSize}px`,
+					border: '2px solid grey',
 				}}
 			>
 				<div
 					style={{
 						position: 'absolute',
-						width: '10px',
-						height: '10px',
+						width: `${cellSize}px`,
+						height: `${cellSize}px`,
 						background: 'black',
-						top: head.posY * 10,
-						left: head.posX * 10,
+						top: head.posY * cellSize,
+						left: head.posX * cellSize,
 					}}
 				/>
 				{tails.map((e, i) => {
@@ -76,11 +81,11 @@ class GridComponent extends React.Component<ComponentProps> {
 						<div
 							style={{
 								position: 'absolute',
-								width: '10px',
-								height: '10px',
+								width: `${cellSize}px`,
+								height: `${cellSize}px`,
 								background: 'grey',
-								top: e.posY * 10,
-								left: e.posX * 10,
+								top: e.posY * cellSize,
+								left: e.posX * cellSize,
 							}}
 							key={i}
 						/>
@@ -89,11 +94,11 @@ class GridComponent extends React.Component<ComponentProps> {
 				<div
 					style={{
 						position: 'absolute',
-						width: '10px',
-						height: '10px',
+						width: `${cellSize}px`,
+						height: `${cellSize}px`,
 						background: 'red',
-						top: item.posY * 10,
-						left: item.posX * 10,
+						top: item.posY * cellSize,
+						left: item.posX * cellSize,
 					}}
 				/>
 			</div>

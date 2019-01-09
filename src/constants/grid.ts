@@ -1,5 +1,5 @@
 export const gridSize = [20, 20];
-export const cellSize = 10;
+export const cellSize = 20;
 
 export enum CellType {
 	CELL_BLANK = 0,
