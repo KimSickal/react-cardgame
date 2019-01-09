@@ -21,3 +21,9 @@ export const getItem = createSelector([
 ], (state) => {
 	return state.item;
 });
+
+export const getBlock = createSelector([
+	getState,
+], (state) => {
+	return state.block;
+});

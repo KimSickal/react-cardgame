@@ -14,11 +14,16 @@ import {
 export interface GridState {
 	grid: CellType[][];
 	item: position;
+	block: position;
 }
 
 const initialGridState: GridState = {
 	grid: [],
 	item: {
+		posX: 0,
+		posY: 0,
+	},
+	block: {
 		posX: 0,
 		posY: 0,
 	},
@@ -48,21 +53,36 @@ export function grid(state = initialGridState, action: GridAction) {
 			};
 		case GridKeys.RANDOM_PUT_ITEM:
 			const newGrid = state.grid;
-			let randomPosX = 0;
-			let randomPosY = 0;
+			let randomItemPosX = 0;
+			let randomItemPosY = 0;
+			let randomBlockPosX = 0;
+			let randomBlockPosY = 0;
 			while(true){
-				randomPosY = Math.floor(Math.random() * gridSize[0]);
-				randomPosX = Math.floor(Math.random() * gridSize[1]);
-				if(newGrid[randomPosY][randomPosX] === CellType.CELL_BLANK){
-					newGrid[randomPosY][randomPosX] = CellType.CELL_SNAKE_ITEM;
+				randomItemPosY = Math.floor(Math.random() * gridSize[0]);
+				randomItemPosX = Math.floor(Math.random() * gridSize[1]);
+				if(newGrid[randomItemPosY][randomItemPosX] === CellType.CELL_BLANK){
+					newGrid[randomItemPosY][randomItemPosX] = CellType.CELL_SNAKE_ITEM;
+					break;
+				}
+			}
+			while(true){
+				randomBlockPosY = Math.floor(Math.random() * gridSize[0]);
+				randomBlockPosX = Math.floor(Math.random() * gridSize[1]);
+				if(newGrid[randomBlockPosY][randomBlockPosX] === CellType.CELL_BLANK){
+					newGrid[randomBlockPosY][randomBlockPosX] = CellType.CELL_SNAKE_BLOCK;
 					break;
 				}
 			}
 			return {
+				...state,
 				grid: newGrid,
 				item: {
-					posX: randomPosX,
-					posY: randomPosY,
+					posX: randomItemPosX,
+					posY: randomItemPosY,
+				},
+				block: {
+					posX: randomBlockPosX,
+					posY: randomBlockPosY,
 				},
 			};
 		default:

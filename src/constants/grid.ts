@@ -6,4 +6,5 @@ export enum CellType {
 	CELL_SNAKE_HEAD,
 	CELL_SNAKE_BODY,
 	CELL_SNAKE_ITEM,
+	CELL_SNAKE_BLOCK,
 }

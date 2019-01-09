@@ -135,25 +135,26 @@ export function keydownMoveHeadIfNeeded(keyCode: number) {
 						posY: prevPos.posY + 1,
 					};
 				default:
-					return prevPos;
+					return;
 			}
 		})();
-
-		if(couldMoveHead(keyCode, targetPos, state)) {
-			const targetCellType = getGrid(state)[targetPos.posY][targetPos.posX];
-			if(targetCellType === CellType.CELL_BLANK) {
-				const endOfTail = getTails(state)[0];
-				dispatch(keydownMoveHead(prevPos, targetPos, endOfTail));
-			}
-			else if(targetCellType === CellType.CELL_SNAKE_ITEM) {
-				dispatch(keydownMoveAndStretch(prevPos, targetPos));
+		if(targetPos !== undefined && targetPos !== null){
+			if(couldMoveHead(keyCode, targetPos, state)) {
+				const targetCellType = getGrid(state)[targetPos.posY][targetPos.posX];
+				if(targetCellType === CellType.CELL_BLANK) {
+					const endOfTail = getTails(state)[0];
+					dispatch(keydownMoveHead(prevPos, targetPos, endOfTail));
+				}
+				else if(targetCellType === CellType.CELL_SNAKE_ITEM) {
+					dispatch(keydownMoveAndStretch(prevPos, targetPos));
+				}
+				else {
+					dispatch(toggleGameOver());
+				}
 			}
 			else {
 				dispatch(toggleGameOver());
 			}
-		}
-		else {
-			dispatch(toggleGameOver());
 		}
 	};
 }

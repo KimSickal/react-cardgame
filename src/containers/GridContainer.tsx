@@ -20,6 +20,7 @@ import {
 	getItem,
 	getGameStatus,
 	getScore,
+	getBlock,
 } from '../selectors';
 
 import {
@@ -44,6 +45,7 @@ interface ComponentProps {
 	head: position;
 	tails: position[];
 	item: position;
+	block: position;
 	isGameOver: boolean;
 	score: number;
 
@@ -65,6 +67,7 @@ class GridComponent extends React.Component<ComponentProps> {
 			head,
 			tails,
 			item,
+			block,
 			isGameOver,
 			score,
 		} = this.props;
@@ -123,11 +126,25 @@ class GridComponent extends React.Component<ComponentProps> {
 							position: 'absolute',
 							width: `${cellSize}px`,
 							height: `${cellSize}px`,
-							background: 'red',
+							background: 'green',
 							top: item.posY * cellSize,
 							left: item.posX * cellSize,
 						}}
 					/>
+					<div
+						style={{
+							position: 'absolute',
+							width: `${cellSize}px`,
+							height: `${cellSize}px`,
+							background: 'red',
+							top: block.posY * cellSize,
+							left: block.posX * cellSize,
+							color: 'white',
+							fontWeight: 'bold',
+						}}
+					>
+						{'X'}
+					</div>
 				</React.Fragment>
 			}
 			</div>
@@ -140,6 +157,7 @@ function mapStateToProps(state: State) {
 		head: getPos(state),
 		tails: getTails(state),
 		item: getItem(state),
+		block: getBlock(state),
 		isGameOver: getGameStatus(state),
 		score: getScore(state),
 	};
