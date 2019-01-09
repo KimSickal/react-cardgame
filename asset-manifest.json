@@ -1,13 +1,13 @@
 {
-  "main.css": "/static/css/main.1834f15c.chunk.css",
-  "main.js": "/static/js/main.11105b17.chunk.js",
-  "main.js.map": "/static/js/main.11105b17.chunk.js.map",
-  "static/js/1.54c6bda4.chunk.js": "/static/js/1.54c6bda4.chunk.js",
-  "static/js/1.54c6bda4.chunk.js.map": "/static/js/1.54c6bda4.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
-  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/css/main.1834f15c.chunk.css.map": "/static/css/main.1834f15c.chunk.css.map",
-  "index.html": "/index.html",
-  "precache-manifest.234d0a09efbde3cf7a3bc16e17c273e2.js": "/precache-manifest.234d0a09efbde3cf7a3bc16e17c273e2.js",
-  "service-worker.js": "/service-worker.js"
+  "main.css": "/react-cardgame/static/css/main.1834f15c.chunk.css",
+  "main.js": "/react-cardgame/static/js/main.11105b17.chunk.js",
+  "main.js.map": "/react-cardgame/static/js/main.11105b17.chunk.js.map",
+  "static/js/1.54c6bda4.chunk.js": "/react-cardgame/static/js/1.54c6bda4.chunk.js",
+  "static/js/1.54c6bda4.chunk.js.map": "/react-cardgame/static/js/1.54c6bda4.chunk.js.map",
+  "runtime~main.js": "/react-cardgame/static/js/runtime~main.f4a55a9c.js",
+  "runtime~main.js.map": "/react-cardgame/static/js/runtime~main.f4a55a9c.js.map",
+  "static/css/main.1834f15c.chunk.css.map": "/react-cardgame/static/css/main.1834f15c.chunk.css.map",
+  "index.html": "/react-cardgame/index.html",
+  "precache-manifest.c05adc516e70ea9e880b6e2c71d57f4d.js": "/react-cardgame/precache-manifest.c05adc516e70ea9e880b6e2c71d57f4d.js",
+  "service-worker.js": "/react-cardgame/service-worker.js"
 }
