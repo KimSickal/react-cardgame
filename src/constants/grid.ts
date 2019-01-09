@@ -1,4 +1,4 @@
-export const gridSize = [20, 20];
+export const gridSize = [10, 10];
 export const cellSize = 20;
 
 export enum CellType {

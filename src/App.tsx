@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import {
-	KeyboardHandlerContainer,
 	GridContainer,
 } from './containers';
 
@@ -23,6 +22,7 @@ import {
 import './App.css';
 
 export class App extends React.Component {
+
 	public render() {
 		return (
 			<div
@@ -36,7 +36,6 @@ export class App extends React.Component {
 						store={createStore(reducers, applyMiddleware(thunk))}
 					>
 						<div className="App">
-							<KeyboardHandlerContainer/>
 							<GridContainer/>
 						</div>
 					</Provider>
@@ -44,7 +43,6 @@ export class App extends React.Component {
 						store={createStore(reducers, applyMiddleware(thunk))}
 					>
 						<div className="App">
-							<KeyboardHandlerContainer/>
 							<GridContainer/>
 						</div>
 					</Provider>
@@ -54,7 +52,6 @@ export class App extends React.Component {
 						store={createStore(reducers, applyMiddleware(thunk))}
 					>
 						<div className="App">
-							<KeyboardHandlerContainer/>
 							<GridContainer/>
 						</div>
 					</Provider>
@@ -62,7 +59,6 @@ export class App extends React.Component {
 						store={createStore(reducers, applyMiddleware(thunk))}
 					>
 						<div className="App">
-							<KeyboardHandlerContainer/>
 							<GridContainer/>
 						</div>
 					</Provider>

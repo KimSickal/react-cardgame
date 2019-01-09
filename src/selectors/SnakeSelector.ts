@@ -33,3 +33,15 @@ export const getTails = createSelector([
 ], (state) => {
 	return state.tails;
 });
+
+export const getGameStatus = createSelector([
+	getState,
+], (state) => {
+	return state.isGameOver;
+});
+
+export const getScore = createSelector([
+	getState,
+], (state) => {
+	return state.score;
+});

@@ -18,6 +18,8 @@ import {
 	getPos,
 	getTails,
 	getItem,
+	getGameStatus,
+	getScore,
 } from '../selectors';
 
 import {
@@ -30,13 +32,20 @@ import {
 } from '../actions';
 
 import {
-	gridSize, cellSize,
+	gridSize,
+	cellSize,
 } from '../constants';
+
+import {
+	KeyboardHandlerContainer,
+} from '../containers';
 
 interface ComponentProps {
 	head: position;
 	tails: position[];
 	item: position;
+	isGameOver: boolean;
+	score: number;
 
 	initializeGrid: typeof initializeGrid;
 	randomPutItem: typeof randomPutItem;
@@ -56,6 +65,8 @@ class GridComponent extends React.Component<ComponentProps> {
 			head,
 			tails,
 			item,
+			isGameOver,
+			score,
 		} = this.props;
 
 		return (
@@ -66,41 +77,59 @@ class GridComponent extends React.Component<ComponentProps> {
 					border: '2px solid grey',
 				}}
 			>
-				<div
-					style={{
-						position: 'absolute',
-						width: `${cellSize}px`,
-						height: `${cellSize}px`,
-						background: 'black',
-						top: head.posY * cellSize,
-						left: head.posX * cellSize,
-					}}
-				/>
-				{tails.map((e, i) => {
-					return (
-						<div
-							style={{
-								position: 'absolute',
-								width: `${cellSize}px`,
-								height: `${cellSize}px`,
-								background: 'grey',
-								top: e.posY * cellSize,
-								left: e.posX * cellSize,
-							}}
-							key={i}
-						/>
-					);
-				})}
-				<div
-					style={{
-						position: 'absolute',
-						width: `${cellSize}px`,
-						height: `${cellSize}px`,
-						background: 'red',
-						top: item.posY * cellSize,
-						left: item.posX * cellSize,
-					}}
-				/>
+			{
+				isGameOver ?
+				<React.Fragment>
+					<p>
+						{'Game'}
+					</p>
+					<p>
+						{'Set'}
+					</p>
+					<p>
+						{`Score: ${score}`}
+					</p>
+				</React.Fragment>
+				:
+				<React.Fragment>
+					<KeyboardHandlerContainer/>
+					<div
+						style={{
+							position: 'absolute',
+							width: `${cellSize}px`,
+							height: `${cellSize}px`,
+							background: 'black',
+							top: head.posY * cellSize,
+							left: head.posX * cellSize,
+						}}
+					/>
+					{tails.map((e, i) => {
+						return (
+							<div
+								style={{
+									position: 'absolute',
+									width: `${cellSize}px`,
+									height: `${cellSize}px`,
+									background: 'grey',
+									top: e.posY * cellSize,
+									left: e.posX * cellSize,
+								}}
+								key={i}
+							/>
+						);
+					})}
+					<div
+						style={{
+							position: 'absolute',
+							width: `${cellSize}px`,
+							height: `${cellSize}px`,
+							background: 'red',
+							top: item.posY * cellSize,
+							left: item.posX * cellSize,
+						}}
+					/>
+				</React.Fragment>
+			}
 			</div>
 		);
 	}
@@ -111,6 +140,8 @@ function mapStateToProps(state: State) {
 		head: getPos(state),
 		tails: getTails(state),
 		item: getItem(state),
+		isGameOver: getGameStatus(state),
+		score: getScore(state),
 	};
 }
 

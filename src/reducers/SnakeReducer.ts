@@ -10,6 +10,8 @@ import {
 export interface SnakeState {
 	head: position;
 	tails: position[];
+	isGameOver: boolean;
+	score: number;
 }
 
 const initialSnakeState: SnakeState = {
@@ -18,11 +20,14 @@ const initialSnakeState: SnakeState = {
 		posY: 0,
 	},
 	tails: [],
+	isGameOver: false,
+	score: 0,
 };
 
 export function snake(state = initialSnakeState, action: SnakeAction) {
 	const {
 		tails,
+		score,
 	} = state;
 
 	switch(action.type) {
@@ -40,6 +45,16 @@ export function snake(state = initialSnakeState, action: SnakeAction) {
 			return {
 				...state,
 				tails: tails.concat(action.targetPos),
+			};
+		case SnakeKeys.TOGGLE_GAME_OVER:
+			return {
+				...state,
+				isGameOver: true,
+			};
+		case SnakeKeys.INCREMENT_SCORE:
+			return {
+				...state,
+				score: score + 1,
 			};
 		default:
 			return state;

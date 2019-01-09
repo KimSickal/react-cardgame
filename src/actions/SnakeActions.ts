@@ -8,6 +8,8 @@ import {
 	PopTailsAction,
 	PushTailsAction,
 	MoveHeadAction,
+	ToggleGameOverAction,
+	IncrementScoreAction,
 } from './types';
 
 import {
@@ -54,6 +56,18 @@ function moveHead(targetPos: position): MoveHeadAction {
 	};
 }
 
+function toggleGameOver(): ToggleGameOverAction {
+	return {
+		type: SnakeKeys.TOGGLE_GAME_OVER,
+	};
+}
+
+function incrementScore(): IncrementScoreAction {
+	return {
+		type: SnakeKeys.INCREMENT_SCORE,
+	};
+}
+
 function couldMoveHead(keyCode: number, targetPos: position, state: State) {
 	if(targetPos.posY < 0 || targetPos.posY >= gridSize[0]) {
 		return false;
@@ -90,6 +104,7 @@ function keydownMoveAndStretch(prevPos: position, targetPos: position) {
 		dispatch(pushTails(prevPos));
 
 		dispatch(randomPutItem());
+		dispatch(incrementScore());
 	};
 }
 
@@ -133,6 +148,12 @@ export function keydownMoveHeadIfNeeded(keyCode: number) {
 			else if(targetCellType === CellType.CELL_SNAKE_ITEM) {
 				dispatch(keydownMoveAndStretch(prevPos, targetPos));
 			}
+			else {
+				dispatch(toggleGameOver());
+			}
+		}
+		else {
+			dispatch(toggleGameOver());
 		}
 	};
 }

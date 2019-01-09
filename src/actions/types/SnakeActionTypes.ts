@@ -10,6 +10,8 @@ export enum SnakeKeys {
 	MOVE_HEAD = 'MOVE_HEAD',
 	POP_TAILS = 'POP_TAILS',
 	PUSH_TAILS = 'PUSH_TAILS',
+	TOGGLE_GAME_OVER = 'TOGGLE_GAME_OVER',
+	INCREMENT_SCORE = 'INCREMENT_SCORE',
 }
 
 export interface MoveHeadAction extends Action {
@@ -26,8 +28,18 @@ export interface PushTailsAction extends Action {
 	targetPos: position;
 }
 
+export interface ToggleGameOverAction extends Action {
+	type: SnakeKeys.TOGGLE_GAME_OVER;
+}
+
+export interface IncrementScoreAction extends Action {
+	type: SnakeKeys.INCREMENT_SCORE;
+}
+
 export type SnakeAction = (
 	| MoveHeadAction
 	| PopTailsAction
 	| PushTailsAction
+	| ToggleGameOverAction
+	| IncrementScoreAction
 );
