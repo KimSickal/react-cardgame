@@ -1,13 +1,13 @@
 {
-  "main.css": "/react-cardgame/static/css/main.1834f15c.chunk.css",
-  "main.js": "/react-cardgame/static/js/main.dc38ae57.chunk.js",
-  "main.js.map": "/react-cardgame/static/js/main.dc38ae57.chunk.js.map",
-  "static/js/1.54c6bda4.chunk.js": "/react-cardgame/static/js/1.54c6bda4.chunk.js",
-  "static/js/1.54c6bda4.chunk.js.map": "/react-cardgame/static/js/1.54c6bda4.chunk.js.map",
-  "runtime~main.js": "/react-cardgame/static/js/runtime~main.f4a55a9c.js",
-  "runtime~main.js.map": "/react-cardgame/static/js/runtime~main.f4a55a9c.js.map",
-  "static/css/main.1834f15c.chunk.css.map": "/react-cardgame/static/css/main.1834f15c.chunk.css.map",
-  "index.html": "/react-cardgame/index.html",
-  "precache-manifest.1d1100cf9cb5686113fefcdc7e4ad148.js": "/react-cardgame/precache-manifest.1d1100cf9cb5686113fefcdc7e4ad148.js",
-  "service-worker.js": "/react-cardgame/service-worker.js"
+  "main.css": "/react-snake-game/static/css/main.1834f15c.chunk.css",
+  "main.js": "/react-snake-game/static/js/main.dc38ae57.chunk.js",
+  "main.js.map": "/react-snake-game/static/js/main.dc38ae57.chunk.js.map",
+  "static/js/1.54c6bda4.chunk.js": "/react-snake-game/static/js/1.54c6bda4.chunk.js",
+  "static/js/1.54c6bda4.chunk.js.map": "/react-snake-game/static/js/1.54c6bda4.chunk.js.map",
+  "runtime~main.js": "/react-snake-game/static/js/runtime~main.436856fc.js",
+  "runtime~main.js.map": "/react-snake-game/static/js/runtime~main.436856fc.js.map",
+  "static/css/main.1834f15c.chunk.css.map": "/react-snake-game/static/css/main.1834f15c.chunk.css.map",
+  "index.html": "/react-snake-game/index.html",
+  "precache-manifest.010372f2496a7b3af54d332041712a6c.js": "/react-snake-game/precache-manifest.010372f2496a7b3af54d332041712a6c.js",
+  "service-worker.js": "/react-snake-game/service-worker.js"
 }
