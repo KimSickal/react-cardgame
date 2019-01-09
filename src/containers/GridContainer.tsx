@@ -17,6 +17,7 @@ import {
 import {
 	getPos,
 	getTails,
+	getItem,
 } from '../selectors';
 
 import {
@@ -25,13 +26,16 @@ import {
 
 import {
 	initializeGrid,
+	randomPutItem,
 } from '../actions';
 
 interface ComponentProps {
 	head: position;
 	tails: position[];
+	item: position;
 
 	initializeGrid: typeof initializeGrid;
+	randomPutItem: typeof randomPutItem;
 }
 
 class GridComponent extends React.Component<ComponentProps> {
@@ -40,12 +44,14 @@ class GridComponent extends React.Component<ComponentProps> {
 			head,
 		} = this.props;
 		this.props.initializeGrid(head);
+		this.props.randomPutItem();
 	}
 
 	public render() {
 		const {
 			head,
 			tails,
+			item,
 		} = this.props;
 
 		return (
@@ -60,7 +66,7 @@ class GridComponent extends React.Component<ComponentProps> {
 						position: 'absolute',
 						width: '10px',
 						height: '10px',
-						background: 'grey',
+						background: 'black',
 						top: head.posY * 10,
 						left: head.posX * 10,
 					}}
@@ -72,7 +78,7 @@ class GridComponent extends React.Component<ComponentProps> {
 								position: 'absolute',
 								width: '10px',
 								height: '10px',
-								background: 'black',
+								background: 'grey',
 								top: e.posY * 10,
 								left: e.posX * 10,
 							}}
@@ -80,6 +86,16 @@ class GridComponent extends React.Component<ComponentProps> {
 						/>
 					);
 				})}
+				<div
+					style={{
+						position: 'absolute',
+						width: '10px',
+						height: '10px',
+						background: 'red',
+						top: item.posY * 10,
+						left: item.posX * 10,
+					}}
+				/>
 			</div>
 		);
 	}
@@ -89,12 +105,14 @@ function mapStateToProps(state: State) {
 	return {
 		head: getPos(state),
 		tails: getTails(state),
+		item: getItem(state),
 	};
 }
 
 function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
 	return bindActionCreators({
 		initializeGrid: initializeGrid,
+		randomPutItem: randomPutItem,
 	}, dispatch);
 }
 export const GridContainer = connect(mapStateToProps, mapDispatchToProps)(GridComponent);

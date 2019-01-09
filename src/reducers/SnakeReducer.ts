@@ -17,16 +17,7 @@ const initialSnakeState: SnakeState = {
 		posX: 0,
 		posY: 0,
 	},
-	tails: [
-		{
-			posX: 2,
-			posY: 0,
-		},
-		{
-			posX: 1,
-			posY: 0,
-		},
-	],
+	tails: [],
 };
 
 export function snake(state = initialSnakeState, action: SnakeAction) {

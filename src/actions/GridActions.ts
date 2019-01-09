@@ -2,6 +2,7 @@ import {
 	setCellAction,
 	GridKeys,
 	initializeGridAction,
+	randomPutItemAction,
 } from './types';
 
 import {
@@ -17,6 +18,12 @@ export function setCell(position: position, cellType: CellType): setCellAction {
 		type: GridKeys.SET_CELL,
 		position: position,
 		cellType: cellType,
+	};
+}
+
+export function randomPutItem(): randomPutItemAction {
+	return {
+		type: GridKeys.RANDOM_PUT_ITEM,
 	};
 }
 

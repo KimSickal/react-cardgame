@@ -25,6 +25,7 @@ import {
 } from '../selectors';
 
 import {
+	randomPutItem,
 	setCell,
 } from '../actions';
 
@@ -65,23 +66,31 @@ function couldMoveHead(keyCode: number, targetPos: position, state: State) {
 
 function keydownMoveHead(prevPos: position, targetPos: position, endOfTail: position) {
 	return (dispatch: Dispatch<AnyAction>) => {
-		dispatch(setCell(prevPos, CellType.CELL_SNAKE_BODY));
-		dispatch(setCell(endOfTail, CellType.CELL_BLANK));
 		dispatch(setCell(targetPos, CellType.CELL_SNAKE_HEAD));
-
 		dispatch(moveHead(targetPos));
-		dispatch(pushTails(prevPos));
-		dispatch(popTails());
+		if(endOfTail === undefined) {
+			dispatch(setCell(prevPos, CellType.CELL_BLANK));
+		}
+		else {
+			dispatch(setCell(prevPos, CellType.CELL_SNAKE_BODY));
+			dispatch(setCell(endOfTail, CellType.CELL_BLANK));
+
+			dispatch(pushTails(prevPos));
+			dispatch(popTails());
+		}
 	};
 }
 
 function keydownMoveAndStretch(prevPos: position, targetPos: position) {
 	return (dispatch: Dispatch<AnyAction>) => {
+		console.log('asdf');
 		dispatch(setCell(prevPos, CellType.CELL_SNAKE_BODY));
 		dispatch(setCell(targetPos, CellType.CELL_SNAKE_HEAD));
 
 		dispatch(moveHead(targetPos));
 		dispatch(pushTails(prevPos));
+
+		dispatch(randomPutItem());
 	};
 }
 

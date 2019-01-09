@@ -13,6 +13,7 @@ import {
 export enum GridKeys {
 	SET_CELL = 'SET_CELL',
 	INIT_GRID = 'INIT_GRID',
+	RANDOM_PUT_ITEM = 'RANDOM_PUT_ITEM',
 }
 
 export interface setCellAction extends Action {
@@ -26,7 +27,12 @@ export interface initializeGridAction extends Action {
 	head: position;
 }
 
+export interface randomPutItemAction extends Action {
+	type: GridKeys.RANDOM_PUT_ITEM;
+}
+
 export type GridAction = (
 	| setCellAction
 	| initializeGridAction
+	| randomPutItemAction
 );

@@ -15,3 +15,9 @@ export const getGrid = createSelector([
 ], (state) => {
 	return state.grid;
 });
+
+export const getItem = createSelector([
+	getState,
+], (state) => {
+	return state.item;
+});
