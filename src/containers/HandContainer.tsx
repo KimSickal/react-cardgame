@@ -23,6 +23,8 @@ import {
 	State,
 } from '../reducers';
 
+import { styles } from './HandContainerStyle';
+
 interface ComponentProps {
 	hand: ReturnType<typeof getCardsOfHand>;
 
@@ -37,19 +39,23 @@ class HandComponent extends React.Component<ComponentProps> {
 		} = this.props;
 
 		return (
-			<div>
-				<div
+			<div
+				style={styles.hand}
+			>
+				<p
 					style={{
 						backgroundColor: 'blue',
+						...styles.hand_card,
 					}}
 					onClick={this.props.drawCardIfCould}
 				>
 					{'draw'}
-				</div>
+				</p>
 				{
 					hand.map((e, i) => {
 						return (
 							<p
+								style={styles.hand_card}
 								key={i}
 								onClick={() => this.props.discardCard(i)}
 							>
