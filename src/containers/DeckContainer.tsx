@@ -37,24 +37,8 @@ class DeckComponent extends React.Component<ComponentProps> {
 	}
 
 	public render() {
-		const {
-			deck,
-		} = this.props;
-
 		return (
-			<div>
-				{
-					deck.map((e, i) => {
-						return (
-							<p
-								key={i}
-							>
-								{`${e.name}`}
-							</p>
-						);
-					})
-				}
-			</div>
+			<div/>
 		);
 	}
 }

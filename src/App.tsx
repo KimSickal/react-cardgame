@@ -17,6 +17,7 @@ import {
 
 import {
 	DeckContainer,
+	HandContainer,
 } from './containers';
 
 import './App.css';
@@ -30,6 +31,7 @@ export class App extends React.Component {
 			>
 				<div className="App">
 					<DeckContainer />
+					<HandContainer/>
 				</div>
 			</Provider>
 		);
