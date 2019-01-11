@@ -15,6 +15,10 @@ import {
 	reducers,
 } from './reducers';
 
+import {
+	DeckContainer,
+} from './containers';
+
 import './App.css';
 
 export class App extends React.Component {
@@ -24,7 +28,9 @@ export class App extends React.Component {
 			<Provider
 				store={createStore(reducers, applyMiddleware(thunk))}
 			>
-				<div className="App" />
+				<div className="App">
+					<DeckContainer />
+				</div>
 			</Provider>
 		);
 	}
