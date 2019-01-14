@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 import {
-	discardCard,
+	dropCard,
 } from '../actions';
 
 interface ComponentProps {
-	discardCard: typeof discardCard;
+	dropCard: typeof dropCard;
 }
 
 export class FieldDropAreaComponent extends React.Component<ComponentProps> {
@@ -14,10 +14,8 @@ export class FieldDropAreaComponent extends React.Component<ComponentProps> {
 		this.onDrop = this.onDrop.bind(this);
 	}
 
-	private onDrop(event: React.DragEvent) {
-		event.preventDefault();
-		console.log(event.dataTransfer.getData('text'), event.target);
-		this.props.discardCard(parseInt(event.dataTransfer.getData('text'), 10));
+	private onDrop(direction: number) {
+		this.props.dropCard(direction);
 	}
 
 	public render() {
@@ -46,7 +44,7 @@ export class FieldDropAreaComponent extends React.Component<ComponentProps> {
 								}}
 								key={i}
 								onDragOver={(event: React.DragEvent) => {event.preventDefault();}}
-								onDrop={this.onDrop}
+								onDrop={() => this.onDrop(i)}
 							/>
 						);
 					})

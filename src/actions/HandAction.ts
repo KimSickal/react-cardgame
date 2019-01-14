@@ -78,11 +78,11 @@ export function dragCard(targetIndex: number) {
 
 export function dropCard(direction: number) {
 	return (dispatch: Dispatch<any>, getState: () => State) => {
-		dispatch(draggingCardEnd());
 		const draggingTarget = getDraggingTarget(getState());
 		if(draggingTarget === null) {
 			return;
 		}
 		dispatch(discardCard(draggingTarget));
+		dispatch(draggingCardEnd());
 	};
 }

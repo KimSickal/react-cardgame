@@ -17,6 +17,8 @@ import {
 import {
 	drawCardIfCould,
 	discardCard,
+	dragCard,
+	dropCard,
 } from '../actions';
 
 import {
@@ -36,17 +38,11 @@ interface ComponentProps {
 
 	drawCardIfCould: typeof drawCardIfCould;
 	discardCard: typeof discardCard;
+	dragCard: typeof dragCard;
+	dropCard: typeof dropCard;
 }
 
 class HandComponent extends React.Component<ComponentProps> {
-	private onDragStart(event: React.DragEvent, cardIndex: number) {
-		console.log(`drag started: ${cardIndex}`);
-		if(event.dataTransfer === null) {
-			return;
-		}
-		event.dataTransfer.setData('text', `${cardIndex}`);
-	}
-
 	public render() {
 		const {
 			hand,
@@ -76,8 +72,7 @@ class HandComponent extends React.Component<ComponentProps> {
 									style={styles.hand_card}
 									key={i}
 									draggable={true}
-									onClick={() => this.props.discardCard(i)}
-									onDragStart={(event: React.DragEvent) => this.onDragStart(event, i)}
+									onDragStart={() => this.props.dragCard(i)}
 								>
 									{`${e.name}`}
 								</p>
@@ -100,6 +95,8 @@ function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
 	return bindActionCreators({
 		drawCardIfCould,
 		discardCard,
+		dragCard,
+		dropCard,
 	}, dispatch);
 }
 

@@ -15,5 +15,6 @@ export const styles: {[name: string]: CSSProperties} = {
 		borderRadius: '10px',
 		backgroundColor: 'white',
 		marginRight: '10px',
+		userSelect: 'none',
 	},
 };
