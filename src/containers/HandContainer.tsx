@@ -23,7 +23,13 @@ import {
 	State,
 } from '../reducers';
 
-import { styles } from './HandContainerStyle';
+import {
+	styles,
+} from './HandContainerStyle';
+
+import {
+	FieldDropAreaComponent,
+} from '../components/FieldDropAreaComponent';
 
 interface ComponentProps {
 	hand: ReturnType<typeof getCardsOfHand>;
@@ -33,38 +39,53 @@ interface ComponentProps {
 }
 
 class HandComponent extends React.Component<ComponentProps> {
+	private onDragStart(event: React.DragEvent, cardIndex: number) {
+		console.log(`drag started: ${cardIndex}`);
+		if(event.dataTransfer === null) {
+			return;
+		}
+		event.dataTransfer.setData('text', `${cardIndex}`);
+	}
+
 	public render() {
 		const {
 			hand,
 		} = this.props;
 
 		return (
-			<div
-				style={styles.hand}
-			>
-				<p
-					style={{
-						backgroundColor: 'blue',
-						...styles.hand_card,
-					}}
-					onClick={this.props.drawCardIfCould}
+			<React.Fragment>
+				<FieldDropAreaComponent
+					{...this.props}
+				/>
+				<div
+					style={styles.hand}
 				>
-					{'draw'}
-				</p>
-				{
-					hand.map((e, i) => {
-						return (
-							<p
-								style={styles.hand_card}
-								key={i}
-								onClick={() => this.props.discardCard(i)}
-							>
-								{`${e.name}`}
-							</p>
-						);
-					})
-				}
-			</div>
+					<p
+						style={{
+							...styles.hand_card,
+							backgroundColor: 'blue',
+						}}
+						onClick={this.props.drawCardIfCould}
+					>
+						{'draw'}
+					</p>
+					{
+						hand.map((e, i) => {
+							return (
+								<p
+									style={styles.hand_card}
+									key={i}
+									draggable={true}
+									onClick={() => this.props.discardCard(i)}
+									onDragStart={(event: React.DragEvent) => this.onDragStart(event, i)}
+								>
+									{`${e.name}`}
+								</p>
+							);
+						})
+					}
+				</div>
+			</React.Fragment>
 		);
 	}
 }

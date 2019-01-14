@@ -9,7 +9,11 @@ export const styles: {[name: string]: CSSProperties} = {
 		justifyContent: 'flex-start',
 	},
 	hand_card: {
-		width: '90',
-		height: '160',
+		width: '100px',
+		height: '150px',
+		border: '1px solid grey',
+		borderRadius: '10px',
+		backgroundColor: 'white',
+		marginRight: '10px',
 	},
 };
