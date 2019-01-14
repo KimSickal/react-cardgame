@@ -27,12 +27,9 @@ import {
 } from '../reducers';
 
 import {
-	styles,
-} from './HandContainerStyle';
-
-import {
+	HandCardsComponent,
 	FieldDropAreaComponent,
-} from '../components/FieldDropAreaComponent';
+} from '../components';
 
 interface ComponentProps {
 	hand: ReturnType<typeof getCardsOfHand>;
@@ -47,58 +44,14 @@ interface ComponentProps {
 
 class HandComponent extends React.Component<ComponentProps> {
 	public render() {
-		const {
-			hand,
-			draggingTarget,
-		} = this.props;
-
 		return (
 			<React.Fragment>
 				<FieldDropAreaComponent
 					{...this.props}
 				/>
-				<div
-					style={styles.hand}
-				>
-					{
-						draggingTarget === null ?
-						<p
-							style={{
-								...styles.hand_card,
-								backgroundColor: 'blue',
-							}}
-							onClick={this.props.drawCardIfCould}
-						>
-							{'draw'}
-						</p>
-						:
-						<p
-							style={{
-								...styles.hand_card,
-								backgroundColor: 'grey',
-							}}
-							onDragOver={(event: React.DragEvent) => {event.preventDefault();}}
-							onDrop={() => this.props.dropCard(-1)}
-						>
-							{'discard'}
-						</p>
-					}
-					{
-						hand.map((e, i) => {
-							return (
-								<p
-									style={styles.hand_card}
-									key={i}
-									draggable={true}
-									onDragStart={() => this.props.dragCard(i)}
-									onDragEnd={this.props.draggingCardEnd}
-								>
-									{`${e.name}`}
-								</p>
-							);
-						})
-					}
-				</div>
+				<HandCardsComponent
+					{...this.props}
+				/>
 			</React.Fragment>
 		);
 	}
