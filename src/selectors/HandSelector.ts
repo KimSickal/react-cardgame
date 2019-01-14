@@ -15,3 +15,9 @@ export const getCardsOfHand = createSelector([
 ], (state) => {
 	return state.cards;
 });
+
+export const getDraggingTarget = createSelector([
+	getState,
+], (state) => {
+	return state.draggingTarget;
+});
