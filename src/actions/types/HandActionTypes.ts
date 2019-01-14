@@ -13,28 +13,28 @@ export enum HandKeys {
 	DRAGGING_CARD_END = 'DRAGGING_CARD_END',
 }
 
-export interface drawCardAction extends Action {
+export interface DrawCardAction extends Action {
 	type: HandKeys.DRAW_CARD;
 	card: Card;
 }
 
-export interface discardCardAction extends Action {
+export interface DiscardCardAction extends Action {
 	type: HandKeys.DISCARD_CARD;
 	targetIndex: number;
 }
 
-export interface draggingCardStartAction extends Action {
+export interface DraggingCardStartAction extends Action {
 	type: HandKeys.DRAGGING_CARD_START;
 	targetIndex: number;
 }
 
-export interface draggingCardEndAction extends Action {
+export interface DraggingCardEndAction extends Action {
 	type: HandKeys.DRAGGING_CARD_END;
 }
 
 export type HandAction = (
-	| drawCardAction
-	| discardCardAction
-	| draggingCardEndAction
-	| draggingCardStartAction
+	| DrawCardAction
+	| DiscardCardAction
+	| DraggingCardEndAction
+	| DraggingCardStartAction
 );

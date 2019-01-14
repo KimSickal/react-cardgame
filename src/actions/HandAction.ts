@@ -4,10 +4,10 @@ import {
 
 import {
 	HandKeys,
-	drawCardAction,
-	discardCardAction,
-	draggingCardStartAction,
-	draggingCardEndAction,
+	DrawCardAction,
+	DiscardCardAction,
+	DraggingCardStartAction,
+	DraggingCardEndAction,
 } from './types';
 
 import {
@@ -27,7 +27,7 @@ import {
 	popDeck,
 } from '../actions';
 
-function drawCard(card: Card): drawCardAction {
+function drawCard(card: Card): DrawCardAction {
 	return {
 		type: HandKeys.DRAW_CARD,
 		card: card,
@@ -50,21 +50,21 @@ export function drawCardIfCould() {
 	};
 }
 
-export function discardCard(targetIndex: number): discardCardAction {
+export function discardCard(targetIndex: number): DiscardCardAction {
 	return {
 		type: HandKeys.DISCARD_CARD,
 		targetIndex: targetIndex,
 	};
 }
 
-function draggingCardStart(targetIndex: number): draggingCardStartAction {
+function draggingCardStart(targetIndex: number): DraggingCardStartAction {
 	return {
 		type: HandKeys.DRAGGING_CARD_START,
 		targetIndex: targetIndex,
 	};
 }
 
-export function draggingCardEnd(): draggingCardEndAction {
+export function draggingCardEnd(): DraggingCardEndAction {
 	return {
 		type: HandKeys.DRAGGING_CARD_END,
 	};
