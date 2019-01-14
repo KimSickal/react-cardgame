@@ -49,6 +49,7 @@ class HandComponent extends React.Component<ComponentProps> {
 	public render() {
 		const {
 			hand,
+			draggingTarget,
 		} = this.props;
 
 		return (
@@ -59,15 +60,29 @@ class HandComponent extends React.Component<ComponentProps> {
 				<div
 					style={styles.hand}
 				>
-					<p
-						style={{
-							...styles.hand_card,
-							backgroundColor: 'blue',
-						}}
-						onClick={this.props.drawCardIfCould}
-					>
-						{'draw'}
-					</p>
+					{
+						draggingTarget === null ?
+						<p
+							style={{
+								...styles.hand_card,
+								backgroundColor: 'blue',
+							}}
+							onClick={this.props.drawCardIfCould}
+						>
+							{'draw'}
+						</p>
+						:
+						<p
+							style={{
+								...styles.hand_card,
+								backgroundColor: 'grey',
+							}}
+							onDragOver={(event: React.DragEvent) => {event.preventDefault();}}
+							onDrop={() => this.props.dropCard(-1)}
+						>
+							{'discard'}
+						</p>
+					}
 					{
 						hand.map((e, i) => {
 							return (
