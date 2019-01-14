@@ -6,6 +6,8 @@ import {
 	HandKeys,
 	drawCardAction,
 	discardCardAction,
+	draggingCardStartAction,
+	draggingCardEndAction,
 } from './types';
 
 import {
@@ -51,5 +53,18 @@ export function discardCard(targetIndex: number): discardCardAction {
 	return {
 		type: HandKeys.DISCARD_CARD,
 		targetIndex: targetIndex,
+	};
+}
+
+export function draggingCardStart(targetIndex: number): draggingCardStartAction {
+	return {
+		type: HandKeys.DRAGGING_CARD_START,
+		targetIndex: targetIndex,
+	};
+}
+
+export function draggingCardEnd(): draggingCardEndAction {
+	return {
+		type: HandKeys.DRAGGING_CARD_END,
 	};
 }
