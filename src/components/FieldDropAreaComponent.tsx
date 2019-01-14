@@ -4,21 +4,61 @@ import {
 	dropCard,
 } from '../actions';
 
+import {
+	getDraggingTarget,
+} from '../selectors';
+
 interface ComponentProps {
+	draggingTarget: ReturnType<typeof getDraggingTarget>;
+
 	dropCard: typeof dropCard;
 }
 
-export class FieldDropAreaComponent extends React.Component<ComponentProps> {
+interface ComponentState {
+	hoveringDirection: number;
+}
+
+export class FieldDropAreaComponent extends React.Component<ComponentProps, ComponentState> {
 	constructor(props: ComponentProps) {
 		super(props);
+		this.state = {
+			hoveringDirection: -1,
+		};
 		this.onDrop = this.onDrop.bind(this);
+		this.onDragOver = this.onDragOver.bind(this);
+		this.onDragLeave = this.onDragLeave.bind(this);
+	}
+
+	private onDragOver(event: React.DragEvent, direction: number) {
+		event.preventDefault();
+		this.setState({
+			hoveringDirection: direction,
+		});
+	}
+
+	private onDragLeave(event: React.DragEvent) {
+		event.preventDefault();
+		this.setState({
+			hoveringDirection: -1,
+		});
 	}
 
 	private onDrop(direction: number) {
+		this.setState({
+			hoveringDirection: -1,
+		});
 		this.props.dropCard(direction);
 	}
 
 	public render() {
+		const {
+			hoveringDirection,
+		} = this.state;
+
+		const {
+			draggingTarget,
+		} = this.props;
+
 		const dragAreaSize = 200;
 		const points = [
 			`0,0`,
@@ -33,6 +73,9 @@ export class FieldDropAreaComponent extends React.Component<ComponentProps> {
 			<svg
 				width={dragAreaSize}
 				height={dragAreaSize}
+				style={{
+					opacity: draggingTarget === null ? 0 : 1,
+				}}
 			>
 				{
 					Array.from(Array(4)).map((_, i) => {
@@ -40,11 +83,12 @@ export class FieldDropAreaComponent extends React.Component<ComponentProps> {
 							<polygon
 								points={`${points[i]} ${points[i+1]} ${centerPoint}`}
 								style={{
-									fill: 'grey',
+									fill: hoveringDirection === i ? 'green' : 'grey',
 								}}
 								key={i}
-								onDragOver={(event: React.DragEvent) => {event.preventDefault();}}
+								onDragOver={(event: React.DragEvent) => {this.onDragOver(event, i);}}
 								onDrop={() => this.onDrop(i)}
+								onDragLeave={this.onDragLeave}
 							/>
 						);
 					})

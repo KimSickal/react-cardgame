@@ -64,7 +64,7 @@ function draggingCardStart(targetIndex: number): draggingCardStartAction {
 	};
 }
 
-function draggingCardEnd(): draggingCardEndAction {
+export function draggingCardEnd(): draggingCardEndAction {
 	return {
 		type: HandKeys.DRAGGING_CARD_END,
 	};

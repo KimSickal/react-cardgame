@@ -11,7 +11,7 @@ import {
 } from 'react-redux';
 
 import {
-	getCardsOfHand,
+	getCardsOfHand, getDraggingTarget,
 } from '../selectors';
 
 import {
@@ -19,6 +19,7 @@ import {
 	discardCard,
 	dragCard,
 	dropCard,
+	draggingCardEnd,
 } from '../actions';
 
 import {
@@ -35,9 +36,11 @@ import {
 
 interface ComponentProps {
 	hand: ReturnType<typeof getCardsOfHand>;
+	draggingTarget: ReturnType<typeof getDraggingTarget>;
 
 	drawCardIfCould: typeof drawCardIfCould;
 	discardCard: typeof discardCard;
+	draggingCardEnd: typeof draggingCardEnd;
 	dragCard: typeof dragCard;
 	dropCard: typeof dropCard;
 }
@@ -73,6 +76,7 @@ class HandComponent extends React.Component<ComponentProps> {
 									key={i}
 									draggable={true}
 									onDragStart={() => this.props.dragCard(i)}
+									onDragEnd={this.props.draggingCardEnd}
 								>
 									{`${e.name}`}
 								</p>
@@ -88,6 +92,7 @@ class HandComponent extends React.Component<ComponentProps> {
 function mapStateToProps(state: State) {
 	return {
 		hand: getCardsOfHand(state),
+		draggingTarget: getDraggingTarget(state),
 	};
 }
 
@@ -95,6 +100,7 @@ function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
 	return bindActionCreators({
 		drawCardIfCould,
 		discardCard,
+		draggingCardEnd,
 		dragCard,
 		dropCard,
 	}, dispatch);
