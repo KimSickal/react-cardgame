@@ -45,6 +45,11 @@ export function field(state = initialFieldState, action: FieldAction) {
 				...state,
 				characters: characters,
 			};
+		case FieldKeys.APPEND_CHARACTER:
+			return {
+				...state,
+				characters: characters.concat(action.targetCharacter),
+			};
 		default:
 			return state;
 	}
