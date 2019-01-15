@@ -12,12 +12,19 @@ import {
 	deck,
 } from './DeckReducer';
 
+import {
+	FieldState,
+	field,
+} from './FieldReducer';
+
 export interface State {
 	hand: HandState;
 	deck: DeckState;
+	field: FieldState;
 }
 
 export const reducers = combineReducers<State>({
 	hand,
 	deck,
+	field,
 });
