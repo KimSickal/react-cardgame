@@ -29,6 +29,7 @@ export function field(state = initialFieldState, action: FieldAction) {
 		characters,
 		field,
 	} = state;
+	console.log(characters);
 	switch(action.type) {
 		case FieldKeys.SET_CELL:
 			field[action.targetPosition.posX][action.targetPosition.posY] = action.cellType;

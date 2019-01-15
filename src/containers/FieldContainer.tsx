@@ -11,38 +11,44 @@ import {
 } from 'react-redux';
 
 import {
-	getCardsOfHand, getDraggingTarget,
+	FieldDropAreaComponent,
+} from '../components';
+
+import {
+	getDraggingTarget,
+	getCharacters,
 } from '../selectors';
 
 import {
-	drawCardIfCould,
-	dragCard,
 	dropCard,
-	draggingCardEnd,
+	appendCharacterIfCould,
 } from '../actions';
 
 import {
 	State,
 } from '../reducers';
 
-import {
-	HandCardsComponent,
-} from '../components';
-
 interface ComponentProps {
-	hand: ReturnType<typeof getCardsOfHand>;
 	draggingTarget: ReturnType<typeof getDraggingTarget>;
+	getCharacters: ReturnType<typeof getCharacters>;
 
-	drawCardIfCould: typeof drawCardIfCould;
-	draggingCardEnd: typeof draggingCardEnd;
-	dragCard: typeof dragCard;
 	dropCard: typeof dropCard;
+	appendCharacterIfCould: typeof appendCharacterIfCould;
 }
 
-class HandComponent extends React.Component<ComponentProps> {
+class FieldComponent extends React.Component<ComponentProps> {
+	public componentDidMount() {
+		this.props.appendCharacterIfCould({
+			position: {
+				posX: 0,
+				posY: 0,
+			},
+		});
+	}
+
 	public render() {
 		return (
-			<HandCardsComponent
+			<FieldDropAreaComponent
 				{...this.props}
 			/>
 		);
@@ -51,18 +57,16 @@ class HandComponent extends React.Component<ComponentProps> {
 
 function mapStateToProps(state: State) {
 	return {
-		hand: getCardsOfHand(state),
 		draggingTarget: getDraggingTarget(state),
+		getCharacters: getCharacters(state),
 	};
 }
 
 function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
 	return bindActionCreators({
-		drawCardIfCould,
-		draggingCardEnd,
-		dragCard,
 		dropCard,
+		appendCharacterIfCould,
 	}, dispatch);
 }
 
-export const HandContainer = connect(mapStateToProps, mapDispatchToProps)(HandComponent);
+export const FieldContainer = connect(mapStateToProps, mapDispatchToProps)(FieldComponent);

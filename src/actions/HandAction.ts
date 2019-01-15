@@ -25,6 +25,7 @@ import {
 
 import {
 	popDeck,
+	moveCharacterIfCould,
 } from '../actions';
 
 function drawCard(card: Card): DrawCardAction {
@@ -82,6 +83,7 @@ export function dropCard(direction: number) {
 		if(draggingTarget === null) {
 			return;
 		}
+		dispatch(moveCharacterIfCould(direction, draggingTarget));
 		dispatch(discardCard(draggingTarget));
 		dispatch(draggingCardEnd());
 	};

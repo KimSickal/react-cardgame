@@ -18,6 +18,7 @@ import {
 import {
 	DeckContainer,
 	HandContainer,
+	FieldContainer,
 } from './containers';
 
 import './App.css';
@@ -32,6 +33,7 @@ export class App extends React.Component {
 				<div className="App">
 					<DeckContainer />
 					<HandContainer/>
+					<FieldContainer/>
 				</div>
 			</Provider>
 		);

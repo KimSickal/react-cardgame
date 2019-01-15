@@ -53,6 +53,9 @@ export function moveCharacterIfCould(direction: direction, characterIndex: numbe
 	return (dispatch: Dispatch<any>, getState: () => State) => {
 		const state = getState();
 		const targetCharacter = getCharacters(state)[0];
+		if(targetCharacter === undefined) {
+			return;
+		}
 		const targetPosition = addVectorToDirection(targetCharacter.position, direction, 1);
 		if(couldMoveCharacter(state, targetPosition)) {
 			dispatch(setCell(targetCharacter.position, CellCode.CELL_BLANK));
