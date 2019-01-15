@@ -11,7 +11,7 @@ import {
 } from './types';
 
 import {
-	Card,
+	Card, isValidDirection,
 } from '../models';
 
 import {
@@ -83,8 +83,10 @@ export function dropCard(direction: number) {
 		if(draggingTarget === null) {
 			return;
 		}
-		dispatch(moveCharacterIfCould(direction, draggingTarget));
-		dispatch(discardCard(draggingTarget));
+		if(isValidDirection(direction)) {
+			dispatch(moveCharacterIfCould(direction, 0));
+		}
 		dispatch(draggingCardEnd());
+		dispatch(discardCard(draggingTarget));
 	};
 }

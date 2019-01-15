@@ -30,7 +30,7 @@ import {
 
 interface ComponentProps {
 	draggingTarget: ReturnType<typeof getDraggingTarget>;
-	getCharacters: ReturnType<typeof getCharacters>;
+	characters: ReturnType<typeof getCharacters>;
 
 	dropCard: typeof dropCard;
 	appendCharacterIfCould: typeof appendCharacterIfCould;
@@ -47,10 +47,31 @@ class FieldComponent extends React.Component<ComponentProps> {
 	}
 
 	public render() {
+		const {
+			characters,
+		} = this.props;
+
 		return (
-			<FieldDropAreaComponent
-				{...this.props}
-			/>
+			<React.Fragment>
+				<FieldDropAreaComponent
+					{...this.props}
+				/>
+				{
+					characters[0] === undefined ?
+					null
+					:
+					<div
+						style={{
+							position: 'absolute',
+							backgroundColor: 'black',
+							top: `${characters[0].position.posY * 10}px`,
+							left: `${characters[0].position.posX * 10}px`,
+							width: `10px`,
+							height: `10px`,
+						}}
+					/>
+				}
+			</React.Fragment>
 		);
 	}
 }
@@ -58,7 +79,7 @@ class FieldComponent extends React.Component<ComponentProps> {
 function mapStateToProps(state: State) {
 	return {
 		draggingTarget: getDraggingTarget(state),
-		getCharacters: getCharacters(state),
+		characters: getCharacters(state),
 	};
 }
 

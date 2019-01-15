@@ -12,10 +12,10 @@ import {
 import {
 	position,
 	CellType,
-	direction,
 	Character,
 	CellCode,
 	addVectorToDirection,
+	isPositionInBound,
 } from '../models';
 
 import {
@@ -23,7 +23,8 @@ import {
 } from '../reducers';
 
 import {
-	getField, getCharacters,
+	getField,
+	getCharacters,
 } from '../selectors';
 
 function setCell(targetPosition: position, cellType: CellType): SetCellAction {
@@ -43,13 +44,16 @@ function moveCharacter(targetPosition: position, characterIndex: number): MoveCh
 }
 
 function couldMoveCharacter(state: State, targetPosition: position) {
-	if(getField(state)[targetPosition.posX][targetPosition.posY] === CellCode.CELL_BLANK) {
-		return true;
+	if(!isPositionInBound(targetPosition)) {
+		return false;
 	}
-	return false;
+	if(getField(state)[targetPosition.posX][targetPosition.posY] !== CellCode.CELL_BLANK) {
+		return false;
+	}
+	return true;
 }
 
-export function moveCharacterIfCould(direction: direction, characterIndex: number) {
+export function moveCharacterIfCould(direction: number, characterIndex: number) {
 	return (dispatch: Dispatch<any>, getState: () => State) => {
 		const state = getState();
 		const targetCharacter = getCharacters(state)[0];
