@@ -12,9 +12,10 @@ import {
 import {
 	position,
 	CellType,
-	Direction,
+	direction,
 	Character,
 	CellCode,
+	addVectorToDirection,
 } from '../models';
 
 import {
@@ -22,7 +23,7 @@ import {
 } from '../reducers';
 
 import {
-	getField,
+	getField, getCharacters,
 } from '../selectors';
 
 function setCell(targetPosition: position, cellType: CellType): SetCellAction {
@@ -33,7 +34,7 @@ function setCell(targetPosition: position, cellType: CellType): SetCellAction {
 	};
 }
 
-export function moveCharacter(targetPosition: position, characterIndex: number): MoveCharacterAction {
+function moveCharacter(targetPosition: position, characterIndex: number): MoveCharacterAction {
 	return {
 		type: FieldKeys.MOVE_CHARACTER,
 		targetPosition: targetPosition,
@@ -41,9 +42,23 @@ export function moveCharacter(targetPosition: position, characterIndex: number):
 	};
 }
 
-export function moveCharacterIfCould(direction: Direction, characterIndex: number) {
+function couldMoveCharacter(state: State, targetPosition: position) {
+	if(getField(state)[targetPosition.posX][targetPosition.posY] === CellCode.CELL_BLANK) {
+		return true;
+	}
+	return false;
+}
+
+export function moveCharacterIfCould(direction: direction, characterIndex: number) {
 	return (dispatch: Dispatch<any>, getState: () => State) => {
-		console.log('asdf');
+		const state = getState();
+		const targetCharacter = getCharacters(state)[0];
+		const targetPosition = addVectorToDirection(targetCharacter.position, direction, 1);
+		if(couldMoveCharacter(state, targetPosition)) {
+			dispatch(setCell(targetCharacter.position, CellCode.CELL_BLANK));
+			dispatch(setCell(targetPosition, targetCharacter));
+			dispatch(moveCharacter(targetPosition, characterIndex));
+		}
 	};
 }
 
